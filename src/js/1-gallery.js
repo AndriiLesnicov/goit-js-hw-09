@@ -70,11 +70,11 @@ const galleryMarkup = images
   .map(
     ({ preview, original, description }) => `
     <li class="gallery-item">
-	<a class="gallery-link" href="large-image.jpg">
+	<a class="gallery-link" href="${original}">
 		<img 
 		  class="gallery-image" 
-		  src="small-image.jpg" 
-		  alt="Image description" 
+		  src="${preview}" 
+		  alt="${description}"
 		/>
 	</a>
 </li>`
@@ -83,19 +83,8 @@ const galleryMarkup = images
 
 galleryContainer.innerHTML = galleryMarkup;
 
-galleryContainer.addEventListener('click', onImgClick);
-
-function onImgClick(event) {
-  event.preventDefault();
-
-  const imgEl = event.target;
-  if (imgEl.nodeName !== 'IMG') return;
-
-  const largeImageURL = imgEl.dataset.source;
-
-  const instance = basicLightbox.create(`
-    <img src="${largeImageURL}" alt="${imgEl.alt}" width="800" height="600">
-  `);
-
-  instance.show();
-}
+new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});

@@ -27,6 +27,12 @@ body {
 main {
   flex-grow: 1;
 }
-main:has(.back-link) {
+.back-link {
   text-align: center;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
